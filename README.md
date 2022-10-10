@@ -1,3 +1,3 @@
  # README # 
  
- Repo for Ruby small problems
+ Repo for RB101 and Ruby small problems
