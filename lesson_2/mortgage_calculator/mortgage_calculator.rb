@@ -7,7 +7,11 @@ def prompt(message)
 end
 
 def valid_user_name?(name)
-  name.length > 0 && /^[a-zA-Z]*$/.match(name)
+  /^[a-zA-Z]+$/.match(name)
+end
+
+def clear_screen
+  system("clear") || system("cls")
 end
 
 def valid_loan_amount?(loan_amount)
@@ -36,12 +40,12 @@ def years_to_months(years) # loan duration in months
   (years.to_f * 12)
 end
 
-def calculator(c_loan_amount, c_monthly_interest_rate, c_duration_in_months)
-  if c_monthly_interest_rate > 0
-    c_loan_amount.to_f * (c_monthly_interest_rate.to_f /
-  (1 - (1 + c_monthly_interest_rate.to_f)**(-c_duration_in_months.to_f)))
+def calculator(loan_amount, monthly_interest_rate, duration_in_months)
+  if monthly_interest_rate > 0
+    loan_amount.to_f * (monthly_interest_rate.to_f /
+  (1 - (1 + monthly_interest_rate.to_f)**(-duration_in_months.to_f)))
   else
-    c_loan_amount.to_f / c_duration_in_months.to_f
+    loan_amount.to_f / duration_in_months.to_f
   end
 end
 
@@ -52,7 +56,7 @@ loop do
   prompt(MESSAGES["name_prompt"])
   user_name = gets.chomp.strip.capitalize
   if valid_user_name?(user_name)
-    system("clear") || system("cls")
+    clear_screen
     prompt "Hi, #{user_name}! Let's get started!"
     break
   else
@@ -69,7 +73,7 @@ loop do # main loop
     prompt(MESSAGES["loan_amount_error"])
   end
 
-  system("clear") || system("cls")
+  clear_screen
 
   user_apr = ""
   loop do
@@ -80,7 +84,7 @@ loop do # main loop
     prompt(MESSAGES["apr_error2"])
   end
 
-  system("clear") || system("cls")
+  clear_screen
 
   duration_in_years = ""
   loop do
@@ -90,23 +94,23 @@ loop do # main loop
     prompt(MESSAGES["loan_duration_error"])
   end
 
-  system("clear") || system("cls")
+  clear_screen
 
   monthly_interest_rate = apr_to_monthly(user_apr)
   duration_in_months = years_to_months(duration_in_years)
-  result = calculator(user_loan_amount, monthly_interest_rate,
+  monthly_payment = calculator(user_loan_amount, monthly_interest_rate,
                       duration_in_months)
 
-  monthly_payment = result.round(2)
   prompt "You chose a $#{user_loan_amount} loan with #{user_apr} APR
           and a duration of #{duration_in_years} years."
-  prompt "Your monthly payment will be: $#{monthly_payment}."
+  prompt "Your monthly payment will be: $#{format('%.2f', monthly_payment)}."
 
   answer = ""
   loop do
     prompt(MESSAGES["repeat_question"])
     answer = gets.chomp.downcase
     if %w(n no y yes).include?(answer)
+      clear_screen
       break
     else
       prompt(MESSAGES["repeat_error"])
@@ -116,6 +120,7 @@ loop do # main loop
   break if %w(n no).include?(answer)
 end
 
-system("clear") || system("cls")
+clear_screen
+
 prompt "Goodbye, #{user_name}!"
 prompt(MESSAGES["goodbye"])
