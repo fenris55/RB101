@@ -99,7 +99,7 @@ loop do # main loop
   monthly_interest_rate = apr_to_monthly(user_apr)
   duration_in_months = years_to_months(duration_in_years)
   monthly_payment = calculator(user_loan_amount, monthly_interest_rate,
-                      duration_in_months)
+                               duration_in_months)
 
   prompt "You chose a $#{user_loan_amount} loan with #{user_apr} APR
           and a duration of #{duration_in_years} years."
