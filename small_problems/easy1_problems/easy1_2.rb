@@ -81,11 +81,96 @@ A: def method is_odd? with one parameter
    set operation that evaluates to true if integer divided by zero has a
    remainder
 
-=end
-
 def is_odd?(integer)
   integer % 2 == 1
 end
 
 puts is_odd?(5)
 puts is_odd?(4)
+
+=end
+
+=begin
+
+retrying 11/16
+
+P:
+write a method that takes and integer and returns `true` if the value is odd.
+
+input: integer
+output: boolean
+
+explicit rules: integer can be positive, negative, or zero
+                assume all input is a valid integer
+                assess absolute value (ignore negative within method)
+                return `true` is integer is odd
+
+implicit rules: assess and return boolean value
+                do not print from within the method
+
+E:
+input: 5 output: true
+input: 2 output: false
+input 0 output: false
+input -9 output: true
+input 'hi' output: error message
+
+D: use a simple logical assessment to determine value
+  (options: if/else, case?)
+
+A:
+
+define method `is_odd?` with one parameter
+identify whether argument is odd or even
+  -if even, return false
+  -if odd, return true
+
+C:
+
+=end
+
+=begin
+
+def is_odd?(integer)
+  if integer.odd?
+    true
+  else
+    false
+  end
+end
+
+def is_odd?(integer)
+  integer.odd?
+end
+
+def is_odd?(integer)
+  case
+  when integer.odd?
+    true
+  else
+    false
+  end
+end
+
+def is_odd?(integer)
+  if integer == 0
+    false
+  elsif integer % 2 == 0
+    false
+  else
+    true
+  end
+end
+
+=end
+
+#oops - was not supposed to use off. retrying shorter modulo
+
+def is_odd?(integer)
+  integer % 2 == 1
+end
+
+p is_odd?(5)
+p is_odd?(-2)
+p is_odd?(0)
+p is_odd?(10)

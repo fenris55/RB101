@@ -1,96 +1,52 @@
-# Easy 1 - 1
-
 =begin
 
-#10/5/22
+P:
+  write a method that takes a string and an integer and prints the string as
+  many times as specific by the integer
 
-#initially this attempt didn't work - didn't need a block paramter
-#bc this is an integer method, not a block?
+  input: string, integer
+  output: strings
 
-def repeat(string, integer)
-  integer.times do
+explicit rules: use a method def to achieve results
+                method must have two parameters (string and int)
+                must print string int number of time
+
+implicit rules: must print output from within the method
+
+edge cases: what if other objects are input
+            what is int is zero or negative
+
+E:
+input: ('hello', 3) => output: hello \n hello \n hello \n
+
+Data: no need to save data; perform printing iteration int number of times
+
+A:
+
+define method with two parameters
+perform a looping action that outputs the first string argument
+stop output when count has reached amount specified by second argument (int)
+
+=end
+
+#first completing using loop
+=begin
+def repeat(string, int)
+  counter = 0
+  loop do
     puts string
+    counter += 1
+    break if counter == int
   end
 end
 
-repeat("Howdy", 5)
+repeat("hello", 3)
+=end
 
+#completing again with Integer#times method
 
-#2nd attempt works
-
-def repeat(string ="Hi!", integer = 3)
-  while integer > 0
-    puts string
-    integer -= 1
-  end
+def repeat(string, int)
+  int.times { puts string } #re-explore using a block parameter here
 end
 
-#repeat("Howdy", 5)
-#repeat('Hello', 3)
-repeat(7)
-repeat("How are you?")
-#tried adding default parameters - the default integer works but
-#the default string does not - instead it uses the integer as the string input
-=end
-
-#second try a week later - 10/12
-# made same error
-
-# retrying easy 1
-
-=begin
-P: write a methods that takes a string and a positive integer and print string
-   integer number of times
-
-   input: string, positive intger
-   output: string (* integer number)
-
-   explicit rules: method must accept string and integer
-   integer must be positive
-   --optimize to perform integer validation and confirm int > 0
-   --optimize to ensure string is not empty and is a string, not int
-   must output string as many times as integer specifies
-
-   implicit rules: string is case-insensitive
-                   print from within method - calling method should print
-                   without p
-
-E: input: "howdy", 3 output: howdy howdy howdy \n
-   input "", 2 output: "" -> "please enter some text"
-   input "hey!", 0 output -> "please enter an integer greater than zero"
-
-D: string and integer -> (integer times method?)
-
-A: def repeat method with two paramters, string and integer
-  use integer to print string int number of times
-  X--call times method on integer - NOPE prints int and starts at zero
-  X--use block to pass in and print string
-  - use a loop and incrementation
-=end
-
-
-# endless loop created if integer is 0
-# OMG. First attempt was correct (using times integer), but didn't work bc I
-# used a block
-=begin
-def repeat(string, integer)
-   loop do
-    puts string
-    integer -= 1
-   break if integer == 0
-   end
-end
-
-
-# repeat("ciao", 3)
-# repeat("", 2)
-repeat("hi!", 0)
-=end
-
-#trying first attempt again
-
-def repeat(string, integer)
-  integer.times { puts string } # so using pipe operaters || is the error here
-end                             # WHY?? - not sure why pipes aren't required
-
-repeat("howdy", 7)
+repeat('howdy', 5)
