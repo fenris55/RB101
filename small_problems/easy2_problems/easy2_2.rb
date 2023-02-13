@@ -71,7 +71,6 @@ a:
 most implementation is the same - get input, perform calculations, output
 set new constants for conversions between ft, in, cm
 
-=end
 
 SQFT_TO_SQINCHES = 144
 SQINCHES_TO_SQCM = 6.4516
@@ -88,3 +87,57 @@ sq_cm = (sq_inches * SQINCHES_TO_SQCM).round(2)
 
 puts "Your room measurements are: #{sq_ft} square feet, #{sq_inches} square " +\
 "inches, and #{sq_cm} square centimeters."
+
+
+problem:
+take length and width of room in meters and return area in sq ft and sq meters
+
+input: 2 numbers
+outputs: strings with number interpolated
+
+rules:
+-ask user for length and width in meters
+-calculate sq ft and sq m
+- return both calculations
+- interpolate results so strings are returned
+-use conversion  1 square meter == 10.7639 square feet
+- output can be integer or float
+
+Assumption:
+-looks like method is not necessary
+-input can be floats or integers?
+
+Notes: easy and almost exact to solution. Even used constant for unknown number.
+- solution uses #round(2) to ensure valid measurement output. modifying
+
+CONVERT_TO_FEET = 10.7639
+
+puts "Enter the length of the room in meters:"
+length = gets.chomp.to_f
+
+puts "Enter the width of the room in meters:"
+width = gets.chomp.to_f
+
+sq_meters = (length * width).round(2)
+sq_feet = (sq_meters * CONVERT_TO_FEET).round(2)
+
+puts "The area of the room is #{sq_meters} square meters and #{sq_feet} square feet."
+
+challenge: modify above code to input ft and output sq ft, sq m, and sq cm
+
+=end
+
+CONVERT_METERS_TO_FEET = 10.7639
+SQM_TO_SQCM = 10000 # had to look this up
+
+puts "Enter the length of the room in feet:"
+length = gets.chomp.to_f
+
+puts "Enter the width of the room in feet:"
+width = gets.chomp.to_f
+
+sq_feet = (length * width).round(2)
+sq_meters = (sq_feet / CONVERT_METERS_TO_FEET).round(2)
+sq_centimeters = (sq_meters * SQM_TO_SQCM).round(2)
+
+puts "The area of the room is #{sq_feet} square feet, #{sq_meters} square meters and #{sq_centimeters} square centimeters."

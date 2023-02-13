@@ -34,7 +34,6 @@ end
 
 completing bonus challenge below: use chomp! and chop!
 # alos, noticing these solutions don't include input validation
-=end
 
 puts "What's your name?"
 name = gets.chomp!
@@ -45,5 +44,70 @@ if name[-1] == '!'
 else
   puts "Hello, #{name}."
 end
+retrying 1/18
+
+problem:
+
+ask for user's name and greet them - if they enter a !, output in all caps
+
+input: string (with or without !)
+output: string
+
+rules:
+-if user name include !, output greeting in all caps
+- otherwise, just greet using name
+ - assume valid input?
+
+algorithm:
+-prompt user for name and save
+- check if name includes !
+  - if no, interpolate name into string greeting and print
+  - if yes, same but upcase output
+
+notes:
+forgot to consider example - ! is removed from output. opted for #delete
+-- could have also used #chop
+
+
+puts "Hi! What's your name?"
+name = gets.chomp
+
+if name.include?('!')
+  puts "HELLO #{name.upcase.delete('!')}. WHY ARE WE SHOUTING?!"
+else
+  puts "How's it going, #{name.capitalize}?"
+end
+
+challenge: repeat, but use both #chomp and #chop
+=end
+
+puts "Hi! What's your name?"
+name = gets.chomp
+
+if name[-1] == '!'
+  puts "HELLO #{name.upcase.chop}. WHY ARE WE SHOUTING?!"
+else
+  puts "How's it going, #{name.capitalize}?"
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

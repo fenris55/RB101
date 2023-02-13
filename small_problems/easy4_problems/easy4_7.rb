@@ -145,7 +145,6 @@ Algorithm:
 - repeat until count is equal to the length of the string
 -return result
 
-=end
 
 def string_to_integer(string)
   numbers = { "0" => 0, "1" => 1, "2" => 2, "3" => 3, "4" => 4, "5" => 5, "6" => 6, "7" => 7, "8" => 8, "9" => 9 }
@@ -168,3 +167,138 @@ def string_to_integer(string)
 end
 
 p string_to_integer("34566")
+
+
+retrying 2/2
+
+problem:
+write a method that take string input and convert to integer without using #to_i
+or (Integer()).
+
+input: string (representing integer)
+output: integer
+
+rules:
+-convert string to integer version without using to_i or Integer()
+-assume all input is valid and positive
+
+examples:
+string_to_integer('4321') == 4321
+string_to_integer('570') == 570
+
+data:
+-hash to store pair associated strings 0-9 with integers
+-maybe array of chars to break down input string?
+
+code:
+-create hash strings_and_ints of string/numeric pairs
+-convert input string to array of char (digits)
+-iterate over digits array (#map)
+  - use the block variable and hash reference to access and return the hash
+  value associated with digit key
+-take returned array of int values and...NOPE. #join will return a string. ok.
+-initialize empty variable (result) and append (<<) each element of int array
+
+Notes: wow that was harder than expected
+most was easy - turning the final array into an integer was the challenge.
+- made it work, but looks messy and can't refactor without breaking the code
+
+trying lesson solution below
+
+
+def string_to_integer(string)
+  s_and_i = {'0' => 0, '1' => 1, '2'=> 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9 }
+  result = 0
+
+  digits = string.chars
+  int_array = digits.map { |digit| s_and_i[digit] }
+  int_array.each do |num|
+    result *= 10 # think reuslt * 10 doesn't work but 10 * result does - why my single line wasn't working
+    result += num
+  end
+  result
+end
+
+def string_to_integer(string)
+
+  s_and_i = {'0' => 0, '1' => 1, '2'=> 2, '3' => 3, '4' => 4,
+             '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9 }
+
+  result = 0
+  digits = string.chars.map { |num| s_and_i[num] }
+  digits.each { |num| result = 10 * result + num } # order here is tricky; overt reassignment within the block
+
+  result
+end
+
+p string_to_integer('4321') == 4321
+p string_to_integer('570') == 570
+
+Challenge:
+create similar method that converts hexadecimal string to integer value
+
+input: string
+output: integer
+
+rules/code
+-need to follow similar process as above
+-reference hash needs to include letters as well
+- noticed that some hexidecimals use lowercase
+  -not an issue based on the one test case, but would be more universal to upncase input
+
+
+notes on converting hex to decimal
+- hex is a based 16 system
+- multiply each hex num by 16 to the power of 1 less than its unit place
+-so first, use hash reference to access the integer value of hex letters
+-
+=end
+
+def hexadecimal_to_integer(string)
+  hexadecimals = {'0' => 0, '1' => 1, '2'=> 2, '3' => 3, '4' => 4,
+             '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9,
+             'A' => 10, 'B' => 11, 'C' => 12, 'D' => 13, 'E' => 14, 'F' => 15
+             }
+
+  chars = string.upcase.chars.map { |el| hexadecimals[el] }
+
+  counter = (string.length) - 1
+
+  result_array = chars.each_with_object([]) do |el, result|
+    result << el * (16 ** counter)
+    counter -=1
+  end
+
+  result_array.sum
+=begin
+  result = 0
+  units = (string.length) - 1
+
+  chars = string.upcase.chars.map { |el| hexadecimals[el] }
+  # this works -- trying with a method instead of loop
+  result = []
+  units
+  counter = 0
+  loop do
+    break if counter == chars.length
+    result << chars[counter] * (16**units)
+    p result
+    counter += 1
+    units -=1
+  end
+
+  p result.sum
+=end
+end
+
+p hexadecimal_to_integer('4D9f') == 19871
+
+
+# second attempt using each_with_object works, but don't love it -- wondering
+# if there's a way to achieve this without using and decrementing a counter
+
+
+
+
+
+

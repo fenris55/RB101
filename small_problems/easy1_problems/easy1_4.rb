@@ -147,8 +147,6 @@ vehicles = ['car', 'car', 'truck', 'car', 'SUV', 'truck',
 
 p count_occurence(vehicles)
 
-=end
-
 
 def count_occurrences(array)
   occurrences = {}
@@ -167,6 +165,16 @@ vehicles = ['car', 'car', 'truck', 'car', 'SUV', 'truck',
 
 p count_occurrences(vehicles)
 
+retrying 1/12 (above is diff bc order changed)
+=end
+
+def calculate_bonus(amount, boolean)
+  boolean ? amount/2 : 0
+end
+
+puts calculate_bonus(2800, true) == 1400
+puts calculate_bonus(1000, false) == 0
+puts calculate_bonus(50000, true) == 25000
 
 
 

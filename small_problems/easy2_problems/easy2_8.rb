@@ -58,8 +58,6 @@ end
 
 Challenge: implement above code using `inject` method
 
-=end
-
 number = ''
 calculation  = ''
 
@@ -88,3 +86,119 @@ elsif calculation == 'p'
  product_result = (1..number).inject {|product, num| product * num }
   puts "The product of the integers between 1 and #{number} is #{product_result}."
 end
+
+redoing 1/18
+
+problem:
+
+prompt user for integer and operation (sum or product); output operation for all
+integers from 1 to int
+
+input: integer (string), string
+output: integers
+
+rules:
+-perform either multiplication or addition on all integers between 1 and int
+-remember, user input is string - convert to integer
+- output result interpolated into string with message
+
+data:
+- if/else for control through
+-iterative structure for completing operation for each inter in range
+
+example:
+4, sum => (1 + 2 + 3 + 4) 10
+3, product => (1 * 2 * 3) 6
+
+
+Notes: probably could be much simpler. Opted for user validation loops. Went
+with two different ways of performing operations: first used #each, second
+used an until loop and decremented
+
+ooh..solution used #upto method within 2 helper methods
+Challenge: explain how #inject works and complete problem again using that method
+** says #inject is a "more Rubyish" way of achieving the goal
+
+num = 0
+operation = ''
+
+loop do
+  puts "Enter a positive integer greater than 0:"
+  num = gets.chomp.to_i
+  break if num > 0
+  puts "Please enter a valid positive integer."
+end
+
+loop do
+  puts "Please choose: sum or product?"
+  operation = gets.chomp.downcase
+  break if %w(sum product).include?(operation)
+end
+
+if operation == 'sum'
+  sum_total = 0
+  (1..num).each do |num|
+    sum_total += num
+  end
+  puts "The sum of the integers between 1 and #{num} is #{sum_total}."
+else
+  product_total = 1
+  until num == 1
+  product_total *= num
+  num -=1
+  end
+  puts "The product of the integers between 1 and #{num} is #{product_total}."
+end
+
+=end
+
+def prompt(message)
+  puts "=> #{message}"
+end
+
+
+
+def find_and_display_sum(number)
+  sum = (1..number).inject(:+)
+  prompt "The sum of all the numbers between 1 and #{number} is #{sum}."
+end
+
+def find_and_display_product(number)
+  product = (1..number).inject(1, :*)
+  prompt "The product of all the numbers between 1 and #{number} is #{product}."
+end
+
+integer = 0
+loop do
+  prompt "Enter a positive number greater than 1:"
+  integer = gets.chomp.to_i
+  break if integer > 0
+  prompt "Sorry, try entering a valid number."
+end
+
+operation = ''
+loop do
+  prompt "Please choose: sum or product."
+  operation = gets.chomp.downcase
+  break if %w{sum product}.include?(operation)
+end
+
+find_and_display_product(integer) if operation == 'product'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

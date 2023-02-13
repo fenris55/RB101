@@ -162,8 +162,6 @@ def is_odd?(integer)
   end
 end
 
-=end
-
 #oops - was not supposed to use off. retrying shorter modulo
 
 def is_odd?(integer)
@@ -174,3 +172,68 @@ p is_odd?(5)
 p is_odd?(-2)
 p is_odd?(0)
 p is_odd?(10)
+
+
+repeating for practice 1/10
+
+problem: take an integer and return `true` if odd
+
+input: integer
+ouput: no output; return boolean
+
+rules:
+- write a method definition
+- input can be positive, negative, or zero
+- method should only consider integer's absolute value (no action needed)
+- return `true` if odd
+  - since a nil return can create problems, should also return false if not odd
+- method returns a boolean
+- method has no output
+- assume input is valid integer
+- cannot use methods `odd?` or `even?`
+
+examples:
+puts is_odd?(2)    # => false
+puts is_odd?(5)    # => true
+
+data:
+use math
+
+algorithm
+opt 1 - if..else statement using modulo to determine if number continuously
+multiplied by 2 results in 0 (even) or 1 (odd)
+
+opt 2 - ternary using the same math above
+
+ACTUALLY, both are unneccesary - the math alone is enough
+
+personal challenge: can you solve without using modulo? - not realllyyy but
+learn the module method can be used instead: 3.modulo(2) == 1
+
+def is_odd?(integer)
+  integer % 2 == 1
+end
+
+
+def is_odd?(integer)
+  integer.modulo(2) == 1
+end
+
+
+puts is_odd?(2)    # => false
+puts is_odd?(5)    # => true
+puts is_odd?(-17)  # => true
+puts is_odd?(-8)   # => false
+puts is_odd?(0)    # => false
+puts is_odd?(7)    # => true
+
+retrying 1/12
+=end
+
+def is_odd?(integer)
+  integer.modulo(2) == 1
+end
+
+puts is_odd?(9)
+puts is_odd?(-13)
+puts is_odd?(4)

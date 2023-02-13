@@ -2,15 +2,12 @@
 
 what will the code output and why
 
-=end
 
 array1 = %w(Moe Larry Curly Shemp Harpo Chico Groucho Zeppo)
 array2 = []
 array1.each { |value| array2 << value }
 array1.each { |value| value.upcase! if value.start_with?('C', 'S') }
 puts array2
-
-=begin
 
 on line 1 local variable `array1` is initialized to an array object of string objects
 on line 2 local variable `array2` is initialized to an empty array object
@@ -35,6 +32,38 @@ Since both upcase! and the shovel operator are mutating methods, the contents of
 
 at this point, they content of both arrays are identitical; all names beginning with a C or an S are not uppercased
 
+retrying 1/21
 
+problem:
+write a method that takes one integer argument; if positive, return int as
+negative; if positive or 0, return int
+
+input: integer
+output: n/a
+return: integer
+
+rules:
+-output nothing
+-if input is 0 or negative (less than 0) return
+-if input is positive ( greater than zero) return negative version
+  (can multiply by -1)
+
+def negative(integer)
+  integer <= 0 ? integer : (integer * -1) # can just add a '-': -integer
+end
+
+p negative(5) == -5
+p negative(-3) == -3
+p negative(0) == 0      # There's no such thing as -0 in ruby
+
+example challenge below: converting to absolute value and then adding the - sign
 
 =end
+
+def negative(integer)
+  -integer.abs
+end
+
+p negative(5) == -5
+p negative(-3) == -3
+p negative(0) == 0

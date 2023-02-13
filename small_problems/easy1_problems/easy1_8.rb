@@ -94,7 +94,6 @@ puts average([9, 47, 23, 95, 16, 52]) == 40
 
 =begin
 challenge: change to float
-=end
 
 def average(numbers)
   added_num = numbers.inject(:+)
@@ -102,3 +101,36 @@ def average(numbers)
 end
 
 p average([1, 6])
+
+Exercises changed - 8 is now Reverse the Digits in a Number
+
+p: write a method that takes an integer and returns it reversed
+
+input: integer
+output: integer (input reversed)
+
+rules:
+inputs and output must both be integers
+output must be reversed input
+for reversal, trailing zeros don't matter (is, 1200 reversed can be 21)
+single digit input should return self
+
+algorithm:
+
+-convert integer to string
+-call #reverse method
+  - alternatively, could turn int to an array, iterate through adding each element
+  to new string - without reverse method, could pop off from end of array
+-convert back to integer
+
+=end
+def reversed_number(int)
+  int.to_s.reverse.to_i
+end
+
+p reversed_number(12345) == 54321
+p reversed_number(12213) == 31221
+p reversed_number(456) == 654
+p reversed_number(12000) == 21 # No leading zeros in return value!
+p reversed_number(12003) == 30021
+p reversed_number(1) == 1

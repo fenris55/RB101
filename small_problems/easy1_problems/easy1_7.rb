@@ -81,8 +81,6 @@ END
 
 C
 
-=end
-
 def stringy(int, start_num=1)
   str = ''
   counter = 0
@@ -108,7 +106,6 @@ puts stringy(4, 0)# == '1010'
 puts stringy(7) == '1010101'
 
 
-=begin
 solution uses times method and an array to hold values
  practing pedac on this
 
@@ -137,4 +134,43 @@ puts stringy(9) == '101010101'
 puts stringy(4) == '1010'
 puts stringy(7) == '1010101'
 
+Problems changed - 7 is now Madlibs
+
+1/15
+
+p: prompt for four words and return a madlibs
+
+input: user input 4 strings (noun, verb, adjective, adverb)
+output: string (sentence with user string interpolated)
+
+rules:
+prompt user for the 4 words
+interpolate and output
+
+data:
+-could use loops for user input validation
+-save user input as variables and interpolate into sentence
+
+algorithm:
+prompt user for noun
+save as local variable
+-repeat for verb, adverb, adjective
+
+output story sentence with strings interpolated
+
 =end
+
+puts "Let's play MadLibs!"
+puts "Emter a noun:"
+noun = gets.chomp
+
+puts "Enter a verb:"
+verb = gets.chomp
+
+puts "Enter an adjective:"
+adjective = gets.chomp
+
+puts "Enter an adverb"
+adverb = gets.chomp
+
+puts "You saw a #{adjective} #{noun} #{adverb} #{verb}?? That's crazy!"
