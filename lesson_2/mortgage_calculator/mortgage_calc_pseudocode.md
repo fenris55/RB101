@@ -61,3 +61,9 @@ P: create mortgage calculator
     4. take above outputs and plug into formula for final output (monthly paym.)
 
 # m = p * (j / (1 - (1 + j)**(-n)))
+
+comments for review:
+
+ISSUES - **need to fix payment output so it always displays two decimals (not .0)
+alternatives to using regex?
+better way to allow for 0 input beyond array?

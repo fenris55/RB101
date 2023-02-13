@@ -22,7 +22,7 @@ end
 # else clause does not allow for input without 0 before . (like '.05')
 def valid_apr?(apr)
   if %w(0 0.0 00.00 .0 .00 0.00).include?(apr)
-    true
+   true
   else
     apr.to_f >= 0 && apr.to_f < 1 && apr.to_f.to_s == apr
   end

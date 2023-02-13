@@ -412,6 +412,14 @@ p result
 # had the right idea here but needed to check solution to maintain subarrays -
 # tried using select since this is a selection, but solution uses a nested map
 
+
+=begin
+We initialize a local variable `array` to the return value of invoking `map` on the array referenced by `hsh`. `map` iterates over each key-value pair in the `hsh`. On lines 58-66, we pass in a do..end block to `map`. This outer-level `map` invocation will transform each key-value pair into the return value of the block on each iteration and return an array containing these element. 
+  
+
+  On each iteration, we assign the current value to the local variable `inner_hash`. If the value associated with `inner_hash[:type]` is equal to the String `fruit`, then we'll invoke `map` on `inner_hash[:colors]` and pass in a block. Otherwise, the key-value pair will be transformed into `nil`. 
+=end
+
 Problem 15
 
 Given this data structure write some code to return an array which contains
@@ -480,6 +488,14 @@ end
 #tried taking array of ages and nils from above and completing the problem
 using a loop -- once again, created an infinite loop and cannot figure out why.
 Discuss in a study session.
+
+munsters = {
+  "Herman" => { "age" => 32, "gender" => "male" },
+  "Lily" => { "age" => 30, "gender" => "female" },
+  "Grandpa" => { "age" => 402, "gender" => "male" },
+  "Eddie" => { "age" => 10, "gender" => "male" },
+  "Marilyn" => { "age" => 23, "gender" => "female"}
+}
 
 result = munsters.map do |person, info|
  #info.map do |key, value|
