@@ -55,7 +55,6 @@ find minutes:
 - wasn't able to get format correct for " sign
 
 next: practice lesson solution and look at challenge
-=end
 
 DEGREE = "\xC2\xB0"
 MINUTE = "'"
@@ -73,9 +72,56 @@ def dms(float)
   format(%(#{degrees}#{DEGREE}%02d'%02d"), minutes, seconds) # ok would not have guess this
 end
 
+# lesson solution: (works backward from finding total seconds)
+
+DEGREE = "\xC2\xB0"
+MINUTES_PER_DEGREE = 60
+SECONDS_PER_MINUTE = 60
+SECONDS_PER_DEGREE = MINUTES_PER_DEGREE * SECONDS_PER_MINUTE
+
+def dms(degrees_float)
+  total_seconds = (degrees_float * SECONDS_PER_DEGREE).round
+  degrees, remaining_seconds = total_seconds.divmod(SECONDS_PER_DEGREE)
+  minutes, seconds = remaining_seconds.divmod(SECONDS_PER_MINUTE)
+  format(%(#{degrees}#{DEGREE}%02d'%02d"), minutes, seconds)
+end
+
 p dms(30) == %(30°00'00")
 p dms(76.73) == %(76°43'48")
-p dms(254.6) #== %(254°36'00") # this is return false, probably bc solutions uses #round
+p dms(254.6) == %(254°36'00")
 p dms(93.034773) == %(93°02'05")
 p dms(0) == %(0°00'00")
 p dms(360) == %(360°00'00") || dms(360) == %(0°00'00")
+
+#Challenge: modify code so that input outside of 0-360 range returns value in range
+=end
+
+
+DEGREE = "\xC2\xB0"
+MINUTES_PER_DEGREE = 60
+SECONDS_PER_MINUTE = 60
+SECONDS_PER_DEGREE = MINUTES_PER_DEGREE * SECONDS_PER_MINUTE
+
+def dms(degrees_float)
+  case
+  when degrees_float > 360
+   degrees_float -= 360 until degrees_float < 360
+  when degrees_float < 0
+    degrees_float += 360 until degrees_float > 0
+  else
+    degrees_float
+  end
+
+  total_seconds = (degrees_float * SECONDS_PER_DEGREE).round
+  degrees, remaining_seconds = total_seconds.divmod(SECONDS_PER_DEGREE)
+  minutes, seconds = remaining_seconds.divmod(SECONDS_PER_MINUTE)
+  format(%(#{degrees}#{DEGREE}%02d'%02d"), minutes, seconds)
+end
+
+p dms(400) == %(40°00'00")
+p dms(-40) == %(320°00'00")
+p dms(-420) == %(300°00'00")
+
+#NOTES: achieve challenges with if/else. then refactored with case statement.
+#tests cases return true. Tried to furhter refator by placing case statement
+#into a helper method but that kept returning nil -- not sure why?
