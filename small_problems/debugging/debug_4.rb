@@ -33,7 +33,6 @@ end
 p reverse_sentence('how are you doing')
 # expected output: 'doing you are how'
 
-=end
 
 #or can use `#unshift`
 
@@ -52,3 +51,29 @@ end
 
 p reverse_sentence('how are you doing')
 # expected output: 'doing you are how'
+
+reviewing 4/3
+
+P:
+why does the code raise an error?
+
+the code raises an error because on line 7, the #+ method is being used to
+join objects from 2 different classes: words[i] here references a string, and
+reveresed_words references an array. This can be fixed by converting word[i] to
+an array object by placing it in square brackets: [words[i]] + reversed words
+
+=end
+
+
+
+
+
+
+
+
+
+
+
+
+
+

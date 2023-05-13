@@ -1,59 +1,53 @@
 =begin
 
-trying 2/5
+retrying 3/27
 
-basically reverse of previous exercises
+P:
+write a method that takes a positive integer and converts it to a string number
+without using a built-in conversion method
 
-problem: write a method that takes an integer (0 or higher) and converts to a string
-
-input: integer
-output: none
-return: string
+input: integer (positive or 0)
+return: string (positive number)
 
 rules:
--input integer can be zero or positive
--convert to string representation of given integer
--do not use built-in methods like Integer#to_s, String(), or Kernel#format
+-convert a positive number to a string
+- do not use built in methods
+-input can be 0 or positive integer
+-assume all input is valid
 
-examples:
+E:
 integer_to_string(4321) == '4321'
 integer_to_string(0) == '0'
 integer_to_string(5000) == '5000'
 
-data:
-same as before: use hash for associations
-iterative structure to evaluate each digit and select associated hash value
+D:
+-hash with integers as keys and corresponding string numbers as values
+-array holding the digits of the input number
+-loop to iterate over digit array and replace/convert each using the numbers hash
+-placehold string for appending each string number taken from hash
 
-algorithm:
-- create hash with integers as keys and associated string numbers as values
-- initialize empty result variable
-- can use #digits to split into array (good to know alternative methods for this)
-- iterate over given integer
-  - use hash reference to access string associated with digit
-  - append to result string (#<<)
+A:
+-initialize a number hash with integers as key and string numbers as values
+-initialize a result variable to an empty string
+-convert input integer to a digits array (and reverse)
+  (is this considered using a conversion method?
+  can also break apart number using %)
+  or loop using #divmod(10) - returns 2 elemnet array
+-iterate over digits array
+  -use hash reference to access the string associated iwth the current number
+  -append string number to empty result string
+-return result string
 
+NOTES: ok, I feel like this doesn't meet the requirements since #digits is
+technically a conversion method. trying again belong using divmod
 
-def integer_to_string(integer)
-  numbers = { 0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5',
-              6 => '6', 7 => '7', 8 => '8', 9 => '9'
-  }
+NUMBERS = { 0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6',
+            7 => '7', 8 => '8', 9 =>'9' }
 
+def integer_to_string(int)
   result = ''
-  integer.digits.each { |el| result << numbers[el] }
-  result.reverse
-end
-
-# easy. Trying out lesson solution, which uses an array, loop, #divmod, and #prepend
-=end
-
-DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '7', '9']
-
-def integer_to_string(number)
-  result = ''
-  loop do
-    number, remainder = number.divmod(10)
-    result.prepend(DIGITS[remainder])
-    break if number == 0
+  int.digits.reverse.each do |num|
+    result << NUMBERS[num]
   end
   result
 end
@@ -61,4 +55,23 @@ end
 p integer_to_string(4321) == '4321'
 p integer_to_string(0) == '0'
 p integer_to_string(5000) == '5000'
+
+#initially used a wwile loop but had to handle 0 separately
+# switching to a loop allowed the break statement ot be placed at the end,
+so that 0 goes through one iteration instead of none
+
+NUMBERS = { 0 => '0', 1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6',
+            7 => '7', 8 => '8', 9 =>'9' }
+
+def integer_to_string(int)
+  result = ''
+  loop do
+    int, current_num = int.divmod(10)
+    result.insert(0, NUMBERS[current_num])
+    break if int == 0
+  end
+ result
+end
+
+=end
 

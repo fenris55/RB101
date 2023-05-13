@@ -64,8 +64,7 @@ def substrings(input_string)
 end
 
 #ugh cannot think of another way to do this. Also my solution modifies the string
-during iteration, which is a bad practice. Checking solution.
-=end
+during iteration, which is a bad practice. Checking solution
 
 def leading_substrings(string)
   result = []
@@ -92,4 +91,73 @@ p substrings('abcde') == [
   'd', 'de',
   'e'
 ]
+
+
+
+
+retrying 3/23
+p:
+write a method that takes a string and returns an array holding all substrings
+
+input: string
+return: array (of all substrings)
+
+rules:
+-order of substrings in retrun array should mirror appearance in input string
+  -all substrings at index 0 should appear first, from shorted to longest
+-assume valid input?
+-assume string is not empty?
+-return self if string has one element?
+-return empty array is string is empty?
+
+E:
+substrings('abcde') == [
+  'a', 'ab', 'abc', 'abcd', 'abcde',
+  'b', 'bc', 'bcd', 'bcde',
+  'c', 'cd', 'cde',
+  'd', 'de',
+  'e'
+]
+
+D:
+-nested loop to iterate A. over each index position and B. to determine length of ss
+-array to hold result
+
+A:
+- initialize empty result array (substrings)
+-iterate from 0 to length of input string - 1 (represents index of string elements)
+  -within iteration:
+    -iterate from index to length of string - 1 (represent length of substring being taken)
+    -from outer index with length of length, add substrign to substring array
+return substring array
+
+=end
+
+def substrings(string)
+  substring_arr = []
+  (0...string.size).each do |idx|
+    (1..string.size - idx).each do |length|
+      substring_arr << string[idx, length]
+    end
+  end
+  substring_arr
+end
+
+
+p substrings('abcde') == [
+  'a', 'ab', 'abc', 'abcd', 'abcde',
+  'b', 'bc', 'bcd', 'bcde',
+  'c', 'cd', 'cde',
+  'd', 'de',
+  'e'
+]
+
+
+
+
+
+
+
+
+
 

@@ -66,8 +66,6 @@ end
 
 puts 'LAUNCH!'
 
-=end
-
 # added challenge - only specify `10` once
 
 def decrease(counter)
@@ -82,3 +80,40 @@ counter.times do
 end
 
 puts 'LAUNCH!'
+
+reviewing 4/3
+
+P:
+why is the code not behaving and how can it be fixed?
+
+-current, counter is being passed into the the decrease method and decremented.
+However, the reassignment counter -=1 created a new method variable, and the
+counter variable in the main program scope is not effected. This can be resolved
+by capturing the return value of the decrease method invocation and reassigning
+capture to reference this return value from withn the block passed to #times.
+-since the = in the decrease method is unneeded, that can also be remvoed for
+clearer code.
+
+=end
+
+def decrease(counter)
+  counter - 1
+end
+
+counter = 10
+
+10.times do
+  puts counter
+  counter = decrease(counter)
+end
+
+puts 'LAUNCH!'
+
+
+
+
+
+
+
+
+

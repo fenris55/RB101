@@ -69,7 +69,6 @@ def cleanup(text)
   clean_chars.join
 end
 
-=end
 #second lesson solution
 
 def cleanup(text)
@@ -77,3 +76,85 @@ def cleanup(text)
 end
 
 p cleanup("---what's my +*& line?")# == ' what s my line '
+
+
+retrying 3/4
+
+problem: write a method that takes a string, removes all non-alphabetic
+characters, and replaces them with a space
+
+input: string
+return: same string with non alphabetic characters replaced with single spaces
+
+rules:
+-all letters in string will be lowercase
+- remove all non-letter characters
+-if string contain consecutive non-letter chars, replaces with a singe space
+
+example:
+cleanup("---what's my +*& line?") == ' what s my line '
+
+
+def cleanup(string)
+  string.gsub!(/[^a-z]/, " ")
+  p string.chars.each_cons(2) { |sub_arr| sub_arr }
+end
+
+p cleanup("---what's my +*& line?") #== ' what s my line '
+
+
+retrying 3/25
+
+P:
+write a method that takes  astring of words and replaces all non-letter chars
+with spaces. For consecutive non-letters, only substitue a single space.
+
+input: string
+return: sam string will non=letters replaced with spaces
+
+rules:
+-input string can contain spaces seaprated words with chars, numbers, and letters
+-remove all non-letters
+-consecutive non-letters should be replaced iwth a single space
+-retun saem string object
+-return strign cannot contain consecutive spaces
+-may resul in leading or trailing spaces
+
+E:
+cleanup("---what's my +*& line?") == ' what s my line '
+
+D:
+-structure to iterate over string and index (each_char, with_index)
+
+A:
+-iterate over input string
+unless curent element is included in range a-z,
+  -replaced char with a space unless indx - 1 (previous char) is a space
+  - i think this raises issues with mutating a string while iterating over it - will the indices shift?
+
+# had to glance at solution -- was not asking for same string to be returned
+def cleanup(string)
+  clean_string = ''
+  string.each_char.with_index do |el, idx|
+    if ('a'..'z').include?(el)
+      clean_string << el
+    else
+      clean_string[-1] == " " ? next : clean_string << ' '
+    end
+  end
+  clean_string
+end
+
+p cleanup("---what's my +*& line?") == ' what s my line '
+
+#shorter solution
+=end
+
+def cleanup(string)
+  string.gsub(/[^a-z]/, ' ').squeeze
+end
+
+p cleanup("---what's my +*& line?") #== ' what s my line '
+
+
+

@@ -51,7 +51,7 @@ manually reverses the array elements at the beginning and end. Both indexes
 are incremented by 1, moving in one element and then reversing the next set of
 elements. the break statement takes the array size and cuts it in half, ensuring
 that the exchange stops at the halfway point.
-=end
+
 
 def reverse!(array)
   left_index = 0
@@ -82,3 +82,103 @@ p list == ["abc"] # true
 list = []
 p reverse!(list) == [] # true
 p list == [] # true
+
+
+
+
+retrying 3/26
+
+P:
+write a method that takes an array and reverse the order of the element in place;
+do not use Array#reverse and return the same array object
+
+input: array
+return: same array (mutated so that elements are reversed)
+
+rules:
+-return the same array object
+-mutate array so all elements are reversed
+-do not Array#reverse or #rray#reverse! methods
+- a 1-element array returns self
+  -individual elements should not be reversed -- only element order in array is reversed
+-empty array should return an empty array
+-for arrays with an ordd number of element, the middle element reamins in place
+-the first and last elements ([0] and [-1]) switch places
+  -then the second and penultimate elements swtich place ([1] and [-2])
+  -then the third and third-last element switch place ([2] and [-3 )
+so is 0 = idx
+  -switch arr[idx] <=> array[-idx + 1]
+  -perform this reversing for the first half of the array
+
+
+E:
+list = [1,2,3,4]
+result = reverse!(list)
+result == [4, 3, 2, 1] # true
+list == [4, 3, 2, 1] # true
+list.object_id == result.object_id # true
+
+list = %w(a b e d c)
+reverse!(list) == ["c", "d", "e", "b", "a"] # true
+list == ["c", "d", "e", "b", "a"] # true
+
+list = ['abc']
+reverse!(list) == ["abc"] # true
+list == ["abc"] # true
+
+list = []
+reverse!(list) == [] # true
+list == [] # true
+
+D:
+-input/return array
+-loop
+
+A:
+-divide the array size by 2 and save as iteration_max
+  -integer division will leave the middle element untouched in array with an odd number of elements
+-from 0 upto one less than the iteration max
+  -iterate over array elements, switch element at current idx with element at
+    negative current index - 1 (minus beause index is negative)
+    how to switch?: el1, el2 = el2, el1
+-may need to explicitly return for a negtive input array
+=end
+def reverse!(arr)
+  max_iteration = arr.size / 2
+  (0...max_iteration).each do |el|
+     arr[el], arr[-el - 1] = arr[-el - 1], arr[el]
+  end
+  arr
+end
+
+
+list = [1,2,3,4]
+p result = reverse!(list)
+p result == [4, 3, 2, 1] # true
+p list == [4, 3, 2, 1] # true
+p list.object_id == result.object_id # true
+
+
+list = %w(a b e d c)
+p reverse!(list) == ["c", "d", "e", "b", "a"] # true
+p list == ["c", "d", "e", "b", "a"] # true
+
+list = ['abc']
+p reverse!(list) == ["abc"] # true
+p list == ["abc"] # true
+
+list = []
+p reverse!(list) == [] # true
+p list == [] # true
+
+
+
+
+
+
+
+
+
+
+
+
